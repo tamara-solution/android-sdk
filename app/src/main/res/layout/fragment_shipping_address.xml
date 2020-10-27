@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_general"
+        tools:context=".ui.ShippingAddressFragment">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/firstNameEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/first_name" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/lastNameEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/last_name" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/phoneEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/phone" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/address1Edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/address_line1" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/address2Edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/address_line2" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/countryEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/country" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/regionEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/region" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/cityEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/city" />
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/useForBillingCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/use_this_for_billing" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/actionBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_general"
+            android:text="@string/select_billing_address" />
+    </LinearLayout>
+</ScrollView>

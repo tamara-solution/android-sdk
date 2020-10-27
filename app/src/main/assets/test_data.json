@@ -1,0 +1,44 @@
+{
+  "order_reference_id": "123456",
+  "description": "Test order using Android SDK",
+  "country_code": "SA",
+  "payment_type": "PAY_BY_LATER",
+  "locale": "en-US",
+  "consumer": {
+    "first_name": "Mona",
+    "last_name": "Lisa",
+    "phone_number": "502223333",
+    "email": "user@example.com",
+    "national_id": "123456",
+    "is_first_order": true
+  },
+  "billing_address": {
+    "first_name": "Mona",
+    "last_name": "Lisa",
+    "line1": "3764 Al Urubah Rd",
+    "line2": "string",
+    "region": "As Sulimaniyah",
+    "city": "Riyadh",
+    "country_code": "SA",
+    "phone_number": "502223333"
+  },
+  "shipping_address": {
+    "first_name": "Mona",
+    "last_name": "Lisa",
+    "line1": "3764 Al Urubah Rd",
+    "line2": "string",
+    "region": "As Sulimaniyah",
+    "city": "Riyadh",
+    "country_code": "SA",
+    "phone_number": "502223333"
+  },
+  "discount": {
+    "name": "Christmas 2020",
+    "amount": {
+      "amount": "50.00",
+      "currency": "SAR"
+    }
+  },
+  "platform": "Android",
+  "is_mobile": true
+}

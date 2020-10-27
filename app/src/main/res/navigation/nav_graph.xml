@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/consumerFragment">
+
+    <fragment
+        android:id="@+id/consumerFragment"
+        android:name="co.tamara.example.ui.ConsumerFragment"
+        android:label="ConsumerFragment" >
+        <argument
+            android:name="order"
+            app:argType="co.tamara.sdk.model.Order" />
+        <action
+            android:id="@+id/action_consumerFragment_to_shopFragment"
+            app:destination="@id/shopFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shopFragment"
+        android:name="co.tamara.example.ui.ShopFragment"
+        android:label="shop_fragment"
+        tools:layout="@layout/fragment_shop" >
+        <action
+            android:id="@+id/action_shopFragment_to_checkoutFragment"
+            app:destination="@id/checkoutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/checkoutFragment"
+        android:name="co.tamara.example.ui.CheckoutFragment"
+        android:label="CheckoutFragment" >
+        <action
+            android:id="@+id/action_checkoutFragment_to_shippingAddressFragment"
+            app:destination="@id/shippingAddressFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shippingAddressFragment"
+        android:name="co.tamara.example.ui.ShippingAddressFragment"
+        android:label="fragment_shipping_address"
+        tools:layout="@layout/fragment_shipping_address" >
+        <argument
+            android:name="order"
+            app:argType="co.tamara.sdk.model.Order" />
+    </fragment>
+</navigation>

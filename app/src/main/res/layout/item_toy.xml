@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:contentPadding="@dimen/padding_general_small"
+    android:layout_marginStart="@dimen/margin_general"
+    android:layout_marginEnd="@dimen/margin_general"
+    android:layout_marginTop="@dimen/margin_general">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/itemNameTxt"
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/skuTxt"
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/priceTxt"
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/taxTxt"
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/removeBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_general_small"
+                android:background="@drawable/add_remove_bg"
+                android:tint="@android:color/white"
+                android:src="@drawable/ic_remove"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/quantityEdit"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_general_small"
+                android:layout_marginStart="@dimen/margin_general"
+                android:layout_marginEnd="@dimen/margin_general"
+                android:gravity="center"
+                android:layout_margin="4dip"
+                android:inputType="number"
+                android:background="@drawable/shape_rectangle_grey_radius_4"/>
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/addBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_general_small"
+                android:background="@drawable/add_remove_bg"
+                android:tint="@android:color/white"
+                android:src="@drawable/ic_add"/>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

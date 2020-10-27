@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding_general">16dp</dimen>
+    <dimen name="margin_general">16dp</dimen>
+    <dimen name="card_radius">4dip</dimen>
+    <dimen name="padding_general_small">4dip</dimen>
+</resources>
