@@ -74,8 +74,7 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
 ```
 
 ## Add Tamara Widget To your view
-![Image of Tamara Widget]
-(tamara_widget.png)
+[Image of Tamara Widget](tamara_widget.png)
 
 ```
 <co.tamara.sdk.widget.PayWithTamaraWidget
