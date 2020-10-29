@@ -126,5 +126,10 @@
             android:layout_margin="@dimen/margin_general"
             android:text="@string/select_items" />
 
+        <co.tamara.sdk.widget.PayWithTamaraWidget
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/tamara_margin_general"/>
+
     </LinearLayout>
 </ScrollView>
