@@ -72,3 +72,13 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
     }
 }
 ```
+
+## Add Tamara Widget To your view
+![Image of Tamara Widget]
+(tamara_widget.png)
+
+```
+<co.tamara.sdk.widget.PayWithTamaraWidget
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+```
