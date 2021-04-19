@@ -44,7 +44,7 @@ Sync project with gradle
 If you created order from your Back End, use checkout URL to process payment
 
 ```
-TamaraPayment.startPayment(activity, checkoutURL)
+TamaraPayment.startPayment(activity, checkoutURL, successUrl, failureUrl, cancelUrl)
 ```
 
 If you want to create order first read this:
