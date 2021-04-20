@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModelProvider
 import co.tamara.example.application.App
 import co.tamara.example.ui.AddressViewModel
 import co.tamara.example.ui.ConsumerViewModel
-import co.tamara.example.ui.OrderViewModel
 import co.tamara.example.ui.ShopViewModel
 
 @Suppress("UNCHECKED_CAST")

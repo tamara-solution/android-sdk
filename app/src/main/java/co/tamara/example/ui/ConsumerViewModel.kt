@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import co.tamara.example.data.DataSource
-import co.tamara.example.model.EAddress
 import co.tamara.example.model.EConsumer
 
 class ConsumerViewModel(private val dataSource: DataSource) : ViewModel(){

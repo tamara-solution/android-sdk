@@ -8,15 +8,19 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import co.tamara.example.R
+import co.tamara.example.databinding.FragmentShippingAddressBinding
 import co.tamara.example.model.EAddress
 import co.tamara.example.viewmodel.ViewModelFactory
 import co.tamara.sdk.TamaraPayment
-import kotlinx.android.synthetic.main.fragment_shipping_address.*
 
 /**
  * A simple [Fragment] subclass.
  */
 class ShippingAddressFragment : Fragment() {
+
+
+    private var _binding: FragmentShippingAddressBinding? = null
+    private val binding get() = _binding!!
 
     private var addresses: List<EAddress>? = null
     private lateinit var addressViewModel: AddressViewModel
@@ -32,45 +36,68 @@ class ShippingAddressFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shipping_address, container, false)
+        _binding = FragmentShippingAddressBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        addressViewModel = ViewModelProvider(this, ViewModelFactory()).get(AddressViewModel::class.java)
+        addressViewModel =
+            ViewModelProvider(this, ViewModelFactory()).get(AddressViewModel::class.java)
         addressViewModel.addresses.observe(viewLifecycleOwner, Observer {
             addresses = it
             fillAddress()
         })
-        useForBillingCheck.setOnCheckedChangeListener { _, checked ->
-            if(checked){
-                actionBtn.text = getString(R.string.pay_via_tamara)
+        binding.useForBillingCheck.setOnCheckedChangeListener { _, checked ->
+            if (checked) {
+                binding.actionBtn.text = getString(R.string.pay_via_tamara)
             } else {
-                actionBtn.text = getString(R.string.select_billing_address)
+                binding.actionBtn.text = getString(R.string.select_billing_address)
             }
         }
-        actionBtn.setOnClickListener {
-            if(step == STEP_SHIPPING_ADDRESS){
-                TamaraPayment.setShippingAddress(firstNameEdit.text.toString(),lastNameEdit.text.toString(),
-                    phoneEdit.text.toString(), address1Edit.text.toString(), address2Edit.text.toString(),
-                    countryEdit.text.toString(), regionEdit.text.toString(), cityEdit.text.toString())
-                if(useForBillingCheck.isChecked){
-                    TamaraPayment.setBillingAddress(firstNameEdit.text.toString(),lastNameEdit.text.toString(),
-                        phoneEdit.text.toString(), address1Edit.text.toString(), address2Edit.text.toString(),
-                        countryEdit.text.toString(), regionEdit.text.toString(), cityEdit.text.toString())
+        binding.actionBtn.setOnClickListener {
+            if (step == STEP_SHIPPING_ADDRESS) {
+                TamaraPayment.setShippingAddress(
+                    binding.firstNameEdit.text.toString(),
+                    binding.lastNameEdit.text.toString(),
+                    binding.phoneEdit.text.toString(),
+                    binding.address1Edit.text.toString(),
+                    binding.address2Edit.text.toString(),
+                    binding.countryEdit.text.toString(),
+                    binding.regionEdit.text.toString(),
+                    binding.cityEdit.text.toString()
+                )
+                if (binding.useForBillingCheck.isChecked) {
+                    TamaraPayment.setBillingAddress(
+                        binding.firstNameEdit.text.toString(),
+                        binding.lastNameEdit.text.toString(),
+                        binding.phoneEdit.text.toString(),
+                        binding.address1Edit.text.toString(),
+                        binding.address2Edit.text.toString(),
+                        binding.countryEdit.text.toString(),
+                        binding.regionEdit.text.toString(),
+                        binding.cityEdit.text.toString()
+                    )
                     processPayment()
                 } else {
                     if (addresses != null && addresses!!.size > 1) {
                         updateUI(addresses!![1])
                     }
-                    useForBillingCheck.visibility = View.GONE
-                    actionBtn.text = getString(R.string.pay_via_tamara)
+                    binding.useForBillingCheck.visibility = View.GONE
+                    binding.actionBtn.text = getString(R.string.pay_via_tamara)
                     step = STEP_BILLING_ADDRESS
                 }
             } else {
-                TamaraPayment.setBillingAddress(firstNameEdit.text.toString(),lastNameEdit.text.toString(),
-                    phoneEdit.text.toString(), address1Edit.text.toString(), address2Edit.text.toString(),
-                    countryEdit.text.toString(), regionEdit.text.toString(), cityEdit.text.toString())
+                TamaraPayment.setBillingAddress(
+                    binding.firstNameEdit.text.toString(),
+                    binding.lastNameEdit.text.toString(),
+                    binding.phoneEdit.text.toString(),
+                    binding.address1Edit.text.toString(),
+                    binding.address2Edit.text.toString(),
+                    binding.countryEdit.text.toString(),
+                    binding.regionEdit.text.toString(),
+                    binding.cityEdit.text.toString()
+                )
                 processPayment()
             }
         }
@@ -81,24 +108,28 @@ class ShippingAddressFragment : Fragment() {
     }
 
     private fun fillAddress() {
-        if(!addresses.isNullOrEmpty()) {
-            if (useForBillingCheck.visibility == View.VISIBLE) {
+        if (!addresses.isNullOrEmpty()) {
+            if (binding.useForBillingCheck.visibility == View.VISIBLE) {
                 updateUI(addresses!![0])
-            } else if(addresses!!.size > 1){
+            } else if (addresses!!.size > 1) {
                 updateUI(addresses!![1])
             }
         }
     }
 
     private fun updateUI(eAddress: EAddress) {
-        firstNameEdit.setText(eAddress.firstName)
-        lastNameEdit.setText(eAddress.lastName)
-        phoneEdit.setText(eAddress.phoneNumber)
-        address1Edit.setText(eAddress.line1)
-        address2Edit.setText(eAddress.line2)
-        countryEdit.setText(eAddress.countryCode)
-        regionEdit.setText(eAddress.region)
-        cityEdit.setText(eAddress.city)
+        binding.firstNameEdit.setText(eAddress.firstName)
+        binding.lastNameEdit.setText(eAddress.lastName)
+        binding.phoneEdit.setText(eAddress.phoneNumber)
+        binding.address1Edit.setText(eAddress.line1)
+        binding.address2Edit.setText(eAddress.line2)
+        binding.countryEdit.setText(eAddress.countryCode)
+        binding.regionEdit.setText(eAddress.region)
+        binding.cityEdit.setText(eAddress.city)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

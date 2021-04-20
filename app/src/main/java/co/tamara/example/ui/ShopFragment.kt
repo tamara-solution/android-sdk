@@ -18,18 +18,17 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import co.tamara.example.R
+import co.tamara.example.databinding.FragmentShopBinding
+import co.tamara.example.databinding.ItemToyBinding
 import co.tamara.example.model.EAmount
 import co.tamara.example.model.EItem
 import co.tamara.example.viewmodel.ViewModelFactory
 import co.tamara.sdk.TamaraPayment
-import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.fragment_shop.*
-import kotlinx.android.synthetic.main.item_toy.*
-import kotlinx.android.synthetic.main.item_toy.view.*
-import java.util.*
 
 class ShopFragment : Fragment() {
 
+    private var _binding: FragmentShopBinding? = null
+    private val binding get() = _binding!!
     private lateinit var orderVieModel: OrderViewModel
     private var items: List<EItem>? = null
     private lateinit var viewModel: ShopViewModel
@@ -38,21 +37,23 @@ class ShopFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_shop, container, false)
+        _binding = FragmentShopBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(requireActivity(), ViewModelFactory()).get(ShopViewModel::class.java)
+        viewModel =
+            ViewModelProvider(requireActivity(), ViewModelFactory()).get(ShopViewModel::class.java)
         orderVieModel = ViewModelProvider(requireActivity()).get(OrderViewModel::class.java)
         viewModel.items.observe(viewLifecycleOwner, Observer {
             items = it
-            shopList.adapter?.notifyDataSetChanged()
+            binding.shopList.adapter?.notifyDataSetChanged()
         })
-        shopList.adapter = ShopAdapter()
-        checkoutBtn.setOnClickListener {
+        binding.shopList.adapter = ShopAdapter()
+        binding.checkoutBtn.setOnClickListener {
             items?.forEach {
-                if(it.quantity > 0) {
+                if (it.quantity > 0) {
                     TamaraPayment.addItem(
                         it.name,
                         it.referenceId,
@@ -70,7 +71,7 @@ class ShopFragment : Fragment() {
     }
 
     fun formatPrice(textView: TextView, originalPrice: String, discountedPrice: String) {
-        if(originalPrice != discountedPrice) {
+        if (originalPrice != discountedPrice) {
             val text = "$originalPrice $discountedPrice"
             textView.setText(text, TextView.BufferType.SPANNABLE)
             val spannable = textView.text as Spannable
@@ -102,21 +103,35 @@ class ShopFragment : Fragment() {
         }
     }
 
-    inner class ShopAdapter: RecyclerView.Adapter<ShopAdapter.ViewHolder>() {
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    inner class ShopAdapter : RecyclerView.Adapter<ShopAdapter.ViewHolder>() {
+
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopAdapter.ViewHolder {
-            var view = LayoutInflater.from(parent.context).inflate(R.layout.item_toy, parent,false)
-            view.addBtn.setOnClickListener {
-                var position = it.tag as Int
+            val view = ViewHolder(
+                ItemToyBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+            view.binding.addBtn.setOnClickListener {
+                val position = it.tag as Int
                 items!![position].quantity = (items!![position].quantity + 1).coerceAtMost(5)
                 notifyDataSetChanged()
             }
-            view.removeBtn.setOnClickListener {
-                var position = it.tag as Int
+            view.binding.removeBtn.setOnClickListener {
+                val position = it.tag as Int
                 items!![position].quantity = (items!![position].quantity - 1).coerceAtLeast(0)
                 notifyDataSetChanged()
             }
-            return ViewHolder(view)
+            return view
+
         }
+
 
         override fun getItemCount(): Int {
             return items?.size ?: 0
@@ -124,18 +139,25 @@ class ShopFragment : Fragment() {
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             var item = items!![position]
-            holder.itemNameTxt.text = item.name
-            holder.skuTxt.text = item.sku
-            val discounted = EAmount((item.unitPrice!!.amount - (item.discountAmount?.amount
-                ?: 0.0)), item.unitPrice!!.currency)
-            formatPrice(holder.priceTxt, item.unitPrice!!.getFormattedAmount(), discounted.getFormattedAmount())
-            holder.taxTxt.text = getString(R.string.tax_with_amount, item.taxAmount?.getFormattedAmount() ?: "0")
-            holder.quantityEdit.text = item.quantity.toString()
-            holder.addBtn.tag = position
-            holder.removeBtn.tag = position
+            holder.binding.itemNameTxt.text = item.name
+            holder.binding.skuTxt.text = item.sku
+            val discounted = EAmount(
+                (item.unitPrice!!.amount - (item.discountAmount?.amount
+                    ?: 0.0)), item.unitPrice!!.currency
+            )
+            formatPrice(
+                holder.binding.priceTxt,
+                item.unitPrice!!.getFormattedAmount(),
+                discounted.getFormattedAmount()
+            )
+            holder.binding.taxTxt.text =
+                getString(R.string.tax_with_amount, item.taxAmount?.getFormattedAmount() ?: "0")
+            holder.binding.quantityEdit.text = item.quantity.toString()
+            holder.binding.addBtn.tag = position
+            holder.binding.removeBtn.tag = position
         }
 
-        inner class ViewHolder(override val containerView: View?) : RecyclerView.ViewHolder(containerView!!), LayoutContainer
+        inner class ViewHolder(val binding: ItemToyBinding) : RecyclerView.ViewHolder(binding.root)
 
     }
 

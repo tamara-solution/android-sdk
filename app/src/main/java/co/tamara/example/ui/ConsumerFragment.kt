@@ -9,9 +9,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import co.tamara.example.R
+import co.tamara.example.databinding.FragmentConsumerBinding
 import co.tamara.example.viewmodel.ViewModelFactory
 import co.tamara.sdk.TamaraPayment
-import kotlinx.android.synthetic.main.fragment_consumer.*
 import java.util.*
 
 
@@ -19,6 +19,9 @@ import java.util.*
  * A simple [Fragment] subclass.
  */
 class ConsumerFragment : Fragment() {
+
+    private var _binding: FragmentConsumerBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var consumerViewModel: ConsumerViewModel
 
@@ -32,7 +35,8 @@ class ConsumerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_consumer, container, false)
+        _binding = FragmentConsumerBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,20 +51,30 @@ class ConsumerFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        consumerViewModel = ViewModelProvider(this, ViewModelFactory()).get(ConsumerViewModel::class.java)
-        consumerViewModel.consumer.observe(viewLifecycleOwner, Observer {consumer->
-            firstNameTxt.text = consumer.firstName
-            lastNameTxt.text = consumer.lastName
-            emailTxt.text = consumer.email
-            phoneTxt.text = consumer.phoneNumber
-            firstOrderCheck.isChecked = consumer?.isFirstOrder ?: false
+        consumerViewModel =
+            ViewModelProvider(this, ViewModelFactory()).get(ConsumerViewModel::class.java)
+        consumerViewModel.consumer.observe(viewLifecycleOwner, Observer { consumer ->
+            binding.firstNameTxt.text = consumer.firstName
+            binding.lastNameTxt.text = consumer.lastName
+            binding.emailTxt.text = consumer.email
+            binding.phoneTxt.text = consumer.phoneNumber
+            binding.firstOrderCheck.isChecked = consumer?.isFirstOrder ?: false
         })
-        shopBtn.setOnClickListener {
-            TamaraPayment.setCustomerInfo(firstNameTxt.text.toString(), lastNameTxt.text.toString(),phoneTxt.text.toString(),
-                emailTxt.text.toString(),firstOrderCheck.isChecked)
+        binding.shopBtn.setOnClickListener {
+            TamaraPayment.setCustomerInfo(
+                binding.firstNameTxt.text.toString(),
+                binding.lastNameTxt.text.toString(),
+                binding.phoneTxt.text.toString(),
+                binding.emailTxt.text.toString(),
+                binding.firstOrderCheck.isChecked
+            )
             findNavController(this).navigate(R.id.shopFragment)
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 }
