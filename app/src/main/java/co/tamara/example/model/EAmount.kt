@@ -1,7 +1,7 @@
 package co.tamara.example.model
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import java.text.NumberFormat
 import java.util.*
 

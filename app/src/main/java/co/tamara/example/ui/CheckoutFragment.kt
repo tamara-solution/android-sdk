@@ -9,16 +9,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import co.tamara.example.R
+import co.tamara.example.databinding.FragmentCheckoutBinding
 import co.tamara.example.model.EAmount
 import co.tamara.example.model.EItem
 import co.tamara.example.viewmodel.ViewModelFactory
 import co.tamara.sdk.TamaraPayment
-import kotlinx.android.synthetic.main.fragment_checkout.*
 
 /**
  * A simple [Fragment] subclass.
  */
 class CheckoutFragment : Fragment() {
+
+    private var _binding: FragmentCheckoutBinding? = null
+    private val binding get() = _binding!!
+
     private var items: List<EItem>? = null
     private lateinit var itemViewModel: OrderViewModel
     private val shippingAmount = EAmount(20.0, "SAR")
@@ -29,26 +33,32 @@ class CheckoutFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_checkout, container, false)
+        _binding = FragmentCheckoutBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        itemViewModel = ViewModelProvider(requireActivity(), ViewModelFactory()).get(OrderViewModel::class.java)
+        itemViewModel =
+            ViewModelProvider(requireActivity(), ViewModelFactory()).get(OrderViewModel::class.java)
         itemViewModel.items.observe(viewLifecycleOwner, Observer { items ->
             this.items = items
             updateUI()
         })
-        shippingFeeTxt.text = shippingAmount.getFormattedAmount()
-        discountTxt.text = getString(R.string.neg_value,discountAmount.getFormattedAmount())
-        addressBtn.setOnClickListener {
+        binding.shippingFeeTxt.text = shippingAmount.getFormattedAmount()
+        binding.discountTxt.text =
+            getString(R.string.neg_value, discountAmount.getFormattedAmount())
+        binding.addressBtn.setOnClickListener {
             TamaraPayment.setShippingAmount(shippingAmount.amount)
-            if(discountCheck.isChecked){
-                TamaraPayment.setDiscount(discountAmount.amount, discountCheck.text.toString())
+            if (binding.discountCheck.isChecked) {
+                TamaraPayment.setDiscount(
+                    discountAmount.amount,
+                    binding.discountCheck.text.toString()
+                )
             }
             findNavController(this).navigate(R.id.shippingAddressFragment)
         }
-        discountCheck.setOnCheckedChangeListener { _, _ ->
+        binding.discountCheck.setOnCheckedChangeListener { _, _ ->
             updateUI()
         }
     }
@@ -57,21 +67,28 @@ class CheckoutFragment : Fragment() {
         var total = 0.0
         var totalPrice = 0.0
         val ship = shippingAmount.amount
-        val discount = if(discountCheck.isChecked) discountAmount.amount else 0.0
+        val discount = if (binding.discountCheck.isChecked) discountAmount.amount else 0.0
         var tax = 0.0
         var count = 0
         var currency = ""
         this.items?.forEach {
-            totalPrice += (it.unitPrice!!.amount - (it.discountAmount?.amount?:0.0)) * it.quantity
-            total += (it.unitPrice!!.amount - (it.discountAmount?.amount?:0.0) + it.taxAmount!!.amount) * it.quantity
+            totalPrice += (it.unitPrice!!.amount - (it.discountAmount?.amount ?: 0.0)) * it.quantity
+            total += (it.unitPrice!!.amount - (it.discountAmount?.amount
+                ?: 0.0) + it.taxAmount!!.amount) * it.quantity
             tax += it.taxAmount!!.amount * it.quantity
             count += it.quantity
             currency = it.unitPrice!!.currency
         }
-        totalItemPriceTxt.text = EAmount(totalPrice, currency).getFormattedAmount()
-        taxTxt.text = EAmount(tax, currency).getFormattedAmount()
-        totalTxt.text = EAmount(total + ship - discount, currency).getFormattedAmount()
-        discountTxt.visibility = if(discountCheck.isChecked) View.VISIBLE else View.GONE
+        binding.totalItemPriceTxt.text = EAmount(totalPrice, currency).getFormattedAmount()
+        binding.taxTxt.text = EAmount(tax, currency).getFormattedAmount()
+        binding.totalTxt.text = EAmount(total + ship - discount, currency).getFormattedAmount()
+        binding.discountTxt.visibility =
+            if (binding.discountCheck.isChecked) View.VISIBLE else View.GONE
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }
