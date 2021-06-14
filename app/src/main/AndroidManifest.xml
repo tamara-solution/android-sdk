@@ -10,12 +10,13 @@
         android:supportsRtl="true"
         android:name="co.tamara.example.application.App"
         android:theme="@style/AppTheme">
-        <activity android:name="co.tamara.example.MainActivity">
+        <activity android:name="co.tamara.example.MainJavaActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="co.tamara.example.MainActivity"/>
     </application>
 
 </manifest>
