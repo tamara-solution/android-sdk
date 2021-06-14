@@ -47,6 +47,12 @@ If you created order from your Back End, use checkout URL to process payment
 TamaraPayment.startPayment(activity, checkoutURL, successUrl, failureUrl, cancelUrl)
 ```
 
+For Java:
+
+```
+TamaraPayment.Companion.startPayment(activity, checkoutURL, successUrl, failureUrl, cancelUrl);
+```
+
 If you want to create order first read this:
 - [Create order and process payment](ORDERREADME.md)
 
@@ -72,6 +78,26 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
     }
 }
 ```
+
+For Java:
+
+```
+@Override
+protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    if(TamaraPaymentHelper.Companion.shouldHandleActivityResult(requestCode, resultCode, data)){
+        PaymentResult result = TamaraPaymentHelper.Companion.getData(data);
+        if(PaymentResult.STATUS_CANCEL == result.getStatus()){
+            Toast.makeText(this, R.string.payment_cancel, Toast.LENGTH_LONG).show();
+        } else if(PaymentResult.STATUS_FAILURE == result.getStatus()){
+            Toast.makeText(this,  result.getMessage() != null ? result.getMessage() : getString(R.string.payment_error), Toast.LENGTH_LONG).show();
+        } else if(PaymentResult.STATUS_SUCCESS == result.getStatus()){
+            Toast.makeText(this, R.string.payment_success, Toast.LENGTH_LONG).show();
+        }
+    }
+}
+```
+
 
 ## Add Tamara Widget To your view
 ![alt Tamara Widget](tamara_widget.png)
