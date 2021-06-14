@@ -15,9 +15,8 @@ internal class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        TamaraPayment.initialize(AppConst.AUTH_TOKEN, AppConst.API_URL, AppConst.NOTIFICATION_WEB_HOOK_URL)
-        TamaraPayment.startPayment(this, "https://checkout-staging.tamara.co/checkout/310fdb59-f447-44df-825b-19f467c6774b?locale=en-US",
-            "tamara://success", "tamara://failure", "tamara://cancel")
+        TamaraPayment.initialize(AppConst.AUTH_TOKEN, AppConst.API_URL, AppConst.NOTIFICATION_WEB_HOOK_URL)
+//        TamaraPayment.startPayment(this, "https://checkout-staging.tamara.co/checkout/310fdb59-f447-44df-825b-19f467c6774b?locale=en-US")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
