@@ -37,4 +37,9 @@
     <string name="total_price">Total price</string>
     <string name="launch_event_discount">Launch event\'s discount</string>
     <string name="neg_value">-%s</string>
+    <string name="quick_test_activity">Quick test from Activity</string>
+    <string name="quick_test_from_fragment">Quick test from Fragment</string>
+    <string name="payment_cancel_from_fragment">Payment canceled (Fragment)</string>
+    <string name="payment_error_from_fragment">Payment error (Fragment)</string>
+    <string name="payment_success_from_fragment">Payment success (Fragment)</string>
 </resources>
