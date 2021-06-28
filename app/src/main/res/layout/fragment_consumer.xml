@@ -10,6 +10,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         tools:context="co.tamara.example.MainActivity">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/fragmentBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_general"
+            android:text="@string/quick_test_from_fragment"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             style="@style/TextAppearance.AppCompat.Headline"

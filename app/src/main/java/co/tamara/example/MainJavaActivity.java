@@ -2,6 +2,7 @@ package co.tamara.example;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -17,8 +18,11 @@ public class MainJavaActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TamaraPayment.Companion.startPayment(this, "https://checkout-staging.tamara.co/checkout/310fdb59-f447-44df-825b-19f467c6774b?locale=en-US",
-                "tamara://success", "tamara://failure", "tamara://cancel");
+        findViewById(R.id.activityBtn).setOnClickListener(v -> {
+            TamaraPayment.Companion.startPayment(this, "https://checkout-staging.tamara.co/checkout/310fdb59-f447-44df-825b-19f467c6774b?locale=en-US",
+                    "tamara://success", "tamara://failure", "tamara://cancel");
+        });
+
     }
 
     @Override
