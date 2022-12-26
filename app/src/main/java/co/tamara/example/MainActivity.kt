@@ -25,10 +25,10 @@ internal class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(TamaraPaymentHelper.shouldHandleActivityResult(requestCode, resultCode, data)){
-            var result = TamaraPaymentHelper.getData(data!!)
-            when(result?.status){
-                PaymentResult.STATUS_CANCEL ->{
+        if (TamaraPaymentHelper.shouldHandleActivityResult(requestCode, resultCode, data)) {
+            val result = TamaraPaymentHelper.getData(data!!)
+            when (result?.status) {
+                PaymentResult.STATUS_CANCEL -> {
                     Toast.makeText(this, R.string.payment_cancel, Toast.LENGTH_LONG).show()
                 }
                 PaymentResult.STATUS_FAILURE -> {
@@ -36,7 +36,7 @@ internal class MainActivity : AppCompatActivity() {
                 }
                 PaymentResult.STATUS_SUCCESS -> {
                     Toast.makeText(this, R.string.payment_success, Toast.LENGTH_LONG).show()
-                    findNavController(this,R.id.navHostFragment).navigate(R.id.consumerFragment)
+                    findNavController(this, R.id.navHostFragment).navigate(R.id.consumerFragment)
                 }
             }
         }

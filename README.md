@@ -19,6 +19,11 @@ kapt 'com.google.dagger:dagger-compiler:2.21'
 kapt 'com.google.dagger:dagger-android-processor:2.21'
 ```
 
+Update proguard file
+```
+-keep class co.tamara.sdk.** { *; }
+```
+
 Add this code at the begin of build.gradle file
 ```
 apply plugin: 'kotlin-android'
@@ -77,6 +82,24 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
         }
     }
 }
+
+override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    super.onActivityResult(requestCode, resultCode, data)
+    if (TamaraPaymentHelper.shouldHandleActivityResult(requestCode, resultCode, data)) {
+        val result = TamaraPaymentHelper.getData(data!!)
+        when (result?.status) {
+            PaymentResult.STATUS_CANCEL -> {
+                //Payment has been cancelled
+            }
+            PaymentResult.STATUS_FAILURE -> {
+                //Payment has occurred an error
+            }
+            PaymentResult.STATUS_SUCCESS -> {
+                //Payment has been made successfully
+            }
+        }
+    }
+}
 ```
 
 For Java:
@@ -85,13 +108,13 @@ For Java:
 @Override
 protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
-    if(TamaraPaymentHelper.Companion.shouldHandleActivityResult(requestCode, resultCode, data)){
+    if (TamaraPaymentHelper.Companion.shouldHandleActivityResult(requestCode, resultCode, data)) {
         PaymentResult result = TamaraPaymentHelper.Companion.getData(data);
-        if(PaymentResult.STATUS_CANCEL == result.getStatus()){
+        if (PaymentResult.STATUS_CANCEL == result.getStatus()) {
             Toast.makeText(this, R.string.payment_cancel, Toast.LENGTH_LONG).show();
-        } else if(PaymentResult.STATUS_FAILURE == result.getStatus()){
-            Toast.makeText(this,  result.getMessage() != null ? result.getMessage() : getString(R.string.payment_error), Toast.LENGTH_LONG).show();
-        } else if(PaymentResult.STATUS_SUCCESS == result.getStatus()){
+        } else if (PaymentResult.STATUS_FAILURE == result.getStatus()) {
+            Toast.makeText(this, result.getMessage() != null ? result.getMessage() : getString(R.string.payment_error), Toast.LENGTH_LONG).show();
+        } else if (PaymentResult.STATUS_SUCCESS == result.getStatus()) {
             Toast.makeText(this, R.string.payment_success, Toast.LENGTH_LONG).show();
         }
     }
