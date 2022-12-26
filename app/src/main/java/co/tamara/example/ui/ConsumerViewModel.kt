@@ -4,15 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import co.tamara.example.data.DataSource
-import co.tamara.example.model.EAddress
 import co.tamara.example.model.EConsumer
 
-class ConsumerViewModel(private val dataSource: DataSource) : ViewModel(){
+class ConsumerViewModel(private val dataSource: DataSource) : ViewModel() {
     val consumer: LiveData<EConsumer> = liveData {
-        var addresses = loadDataFromAsset()
+        val addresses = loadDataFromAsset()
         emit(addresses)
     }
-    private suspend fun loadDataFromAsset(): EConsumer {
+
+    private fun loadDataFromAsset(): EConsumer {
         return dataSource.loadConsumer()
     }
 }

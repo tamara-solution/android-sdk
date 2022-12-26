@@ -43,21 +43,25 @@ class ShippingAddressFragment : Fragment() {
             fillAddress()
         })
         useForBillingCheck.setOnCheckedChangeListener { _, checked ->
-            if(checked){
+            if (checked) {
                 actionBtn.text = getString(R.string.pay_via_tamara)
             } else {
                 actionBtn.text = getString(R.string.select_billing_address)
             }
         }
         actionBtn.setOnClickListener {
-            if(step == STEP_SHIPPING_ADDRESS){
-                TamaraPayment.setShippingAddress(firstNameEdit.text.toString(),lastNameEdit.text.toString(),
+            if (step == STEP_SHIPPING_ADDRESS) {
+                TamaraPayment.setShippingAddress(
+                    firstNameEdit.text.toString(), lastNameEdit.text.toString(),
                     phoneEdit.text.toString(), address1Edit.text.toString(), address2Edit.text.toString(),
-                    countryEdit.text.toString(), regionEdit.text.toString(), cityEdit.text.toString())
-                if(useForBillingCheck.isChecked){
-                    TamaraPayment.setBillingAddress(firstNameEdit.text.toString(),lastNameEdit.text.toString(),
+                    countryEdit.text.toString(), regionEdit.text.toString(), cityEdit.text.toString()
+                )
+                if (useForBillingCheck.isChecked) {
+                    TamaraPayment.setBillingAddress(
+                        firstNameEdit.text.toString(), lastNameEdit.text.toString(),
                         phoneEdit.text.toString(), address1Edit.text.toString(), address2Edit.text.toString(),
-                        countryEdit.text.toString(), regionEdit.text.toString(), cityEdit.text.toString())
+                        countryEdit.text.toString(), regionEdit.text.toString(), cityEdit.text.toString()
+                    )
                     processPayment()
                 } else {
                     if (addresses != null && addresses!!.size > 1) {
@@ -68,9 +72,11 @@ class ShippingAddressFragment : Fragment() {
                     step = STEP_BILLING_ADDRESS
                 }
             } else {
-                TamaraPayment.setBillingAddress(firstNameEdit.text.toString(),lastNameEdit.text.toString(),
+                TamaraPayment.setBillingAddress(
+                    firstNameEdit.text.toString(), lastNameEdit.text.toString(),
                     phoneEdit.text.toString(), address1Edit.text.toString(), address2Edit.text.toString(),
-                    countryEdit.text.toString(), regionEdit.text.toString(), cityEdit.text.toString())
+                    countryEdit.text.toString(), regionEdit.text.toString(), cityEdit.text.toString()
+                )
                 processPayment()
             }
         }
@@ -81,10 +87,10 @@ class ShippingAddressFragment : Fragment() {
     }
 
     private fun fillAddress() {
-        if(!addresses.isNullOrEmpty()) {
+        if (!addresses.isNullOrEmpty()) {
             if (useForBillingCheck.visibility == View.VISIBLE) {
                 updateUI(addresses!![0])
-            } else if(addresses!!.size > 1){
+            } else if (addresses!!.size > 1) {
                 updateUI(addresses!![1])
             }
         }

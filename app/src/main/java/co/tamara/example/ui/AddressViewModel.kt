@@ -6,12 +6,13 @@ import androidx.lifecycle.liveData
 import co.tamara.example.data.DataSource
 import co.tamara.example.model.EAddress
 
-class AddressViewModel(private val dataSource: DataSource) : ViewModel(){
+class AddressViewModel(private val dataSource: DataSource) : ViewModel() {
     val addresses: LiveData<List<EAddress>> = liveData {
-        var addresses = loadDataFromAsset()
+        val addresses = loadDataFromAsset()
         emit(addresses)
     }
-    private suspend fun loadDataFromAsset(): List<EAddress> {
+
+    private fun loadDataFromAsset(): List<EAddress> {
         return dataSource.loadListAddress()
     }
 }

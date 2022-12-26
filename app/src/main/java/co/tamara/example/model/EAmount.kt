@@ -9,8 +9,8 @@ import java.util.*
 data class EAmount(
     var amount: Double = 0.0, // 50.00
     var currency: String = "" // SAR
-): Parcelable {
-    fun getFormattedAmount(): String{
+) : Parcelable {
+    fun getFormattedAmount(): String {
         val format: NumberFormat = NumberFormat.getCurrencyInstance()
         format.maximumFractionDigits = 0
         format.currency = Currency.getInstance("SAR")

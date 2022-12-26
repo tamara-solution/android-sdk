@@ -18,8 +18,13 @@ internal class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         TamaraPayment.initialize(AppConst.AUTH_TOKEN, AppConst.API_URL, AppConst.NOTIFICATION_WEB_HOOK_URL)
         activityBtn.setOnClickListener {
-            TamaraPayment.startPayment(this, "https://checkout-staging.tamara.co/checkout/310fdb59-f447-44df-825b-19f467c6774b?locale=en-US",
-                    "tamara://success", "tamara://failure", "tamara://cancel")
+            TamaraPayment.startPayment(
+                activity = this,
+                checkOutUrl = "https://checkout-staging.tamara.co/checkout/310fdb59-f447-44df-825b-19f467c6774b?locale=en-US",
+                successCallbackUrl = "tamara://success",
+                failureCallbackUrl = "tamara://failure",
+                cancelCallbackUrl = "tamara://cancel"
+            )
         }
     }
 

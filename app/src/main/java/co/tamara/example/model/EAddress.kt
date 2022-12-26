@@ -21,4 +21,4 @@ data class EAddress(
     var line2: String = "", // string
     @SerializedName("phone_number") var phoneNumber: String = "", // 502223333
     var region: String = "" // As Sulimaniyah
-): Parcelable
+) : Parcelable

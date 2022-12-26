@@ -13,4 +13,4 @@ data class EConsumer(
     @SerializedName("date_of_birth") var dateOfBirth: String = "",
     @SerializedName("national_id") var nationalId: String = "",
     @SerializedName("is_first_order") var isFirstOrder: Boolean = false
-): Parcelable
+) : Parcelable

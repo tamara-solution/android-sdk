@@ -26,7 +26,6 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.fragment_shop.*
 import kotlinx.android.synthetic.main.item_toy.*
 import kotlinx.android.synthetic.main.item_toy.view.*
-import java.util.*
 
 class ShopFragment : Fragment() {
 
@@ -52,7 +51,7 @@ class ShopFragment : Fragment() {
         shopList.adapter = ShopAdapter()
         checkoutBtn.setOnClickListener {
             items?.forEach {
-                if(it.quantity > 0) {
+                if (it.quantity > 0) {
                     TamaraPayment.addItem(
                         it.name,
                         it.referenceId,
@@ -70,7 +69,7 @@ class ShopFragment : Fragment() {
     }
 
     fun formatPrice(textView: TextView, originalPrice: String, discountedPrice: String) {
-        if(originalPrice != discountedPrice) {
+        if (originalPrice != discountedPrice) {
             val text = "$originalPrice $discountedPrice"
             textView.setText(text, TextView.BufferType.SPANNABLE)
             val spannable = textView.text as Spannable
@@ -102,16 +101,16 @@ class ShopFragment : Fragment() {
         }
     }
 
-    inner class ShopAdapter: RecyclerView.Adapter<ShopAdapter.ViewHolder>() {
+    inner class ShopAdapter : RecyclerView.Adapter<ShopAdapter.ViewHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopAdapter.ViewHolder {
-            var view = LayoutInflater.from(parent.context).inflate(R.layout.item_toy, parent,false)
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_toy, parent, false)
             view.addBtn.setOnClickListener {
-                var position = it.tag as Int
+                val position = it.tag as Int
                 items!![position].quantity = (items!![position].quantity + 1).coerceAtMost(5)
                 notifyDataSetChanged()
             }
             view.removeBtn.setOnClickListener {
-                var position = it.tag as Int
+                val position = it.tag as Int
                 items!![position].quantity = (items!![position].quantity - 1).coerceAtLeast(0)
                 notifyDataSetChanged()
             }
@@ -123,11 +122,13 @@ class ShopFragment : Fragment() {
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            var item = items!![position]
+            val item = items!![position]
             holder.itemNameTxt.text = item.name
             holder.skuTxt.text = item.sku
-            val discounted = EAmount((item.unitPrice!!.amount - (item.discountAmount?.amount
-                ?: 0.0)), item.unitPrice!!.currency)
+            val discounted = EAmount(
+                (item.unitPrice!!.amount - (item.discountAmount?.amount
+                    ?: 0.0)), item.unitPrice!!.currency
+            )
             formatPrice(holder.priceTxt, item.unitPrice!!.getFormattedAmount(), discounted.getFormattedAmount())
             holder.taxTxt.text = getString(R.string.tax_with_amount, item.taxAmount?.getFormattedAmount() ?: "0")
             holder.quantityEdit.text = item.quantity.toString()

@@ -18,8 +18,11 @@ public class MainJavaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findViewById(R.id.activityBtn).setOnClickListener(v -> {
-            TamaraPayment.Companion.startPayment(this, "https://checkout-staging.tamara.co/checkout/310fdb59-f447-44df-825b-19f467c6774b?locale=en-US",
-                    "tamara://success", "tamara://failure", "tamara://cancel");
+            TamaraPayment.Companion.startPayment(this,
+                    "https://checkout-staging.tamara.co/checkout/310fdb59-f447-44df-825b-19f467c6774b?locale=en-US",
+                    "tamara://success",
+                    "tamara://failure",
+                    "tamara://cancel");
         });
 
     }

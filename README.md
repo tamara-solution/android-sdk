@@ -67,10 +67,10 @@ In your activity, use TamaraPaymentHelper to handle data returned from the SDK
 ```
 override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
     super.onActivityResult(requestCode, resultCode, data)
-    if(TamaraPaymentHelper.shouldHandleActivityResult(requestCode, resultCode, data)){
-        var result = TamaraPaymentHelper.getData(data!!)
-        when(result?.status){
-            PaymentResult.STATUS_CANCEL ->{
+    if (TamaraPaymentHelper.shouldHandleActivityResult(requestCode, resultCode, data)) {
+        val result = TamaraPaymentHelper.getData(data!!)
+        when (result?.status) {
+            PaymentResult.STATUS_CANCEL -> {
                 //Payment has been cancelled
             }
             PaymentResult.STATUS_FAILURE -> {
@@ -126,7 +126,12 @@ protected void onActivityResult(int requestCode, int resultCode, @Nullable Inten
 ![alt Tamara Widget](tamara_widget.png)
 
 ```
-<co.tamara.sdk.widget.PayWithTamaraWidget
+<co.tamara.sdk.widget.TamaraWidgetText
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"/>
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    app:currency="SAR"
+    app:pay_value="100"
+    app:unequal="true"
+    app:widget_mode="border" />
 ```

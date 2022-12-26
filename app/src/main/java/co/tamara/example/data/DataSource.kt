@@ -10,13 +10,13 @@ import com.google.gson.reflect.TypeToken
 
 class DataSource(private val context: Context) {
 
-    fun loadListItem(): List<EItem>{
+    fun loadListItem(): List<EItem> {
         val jsonFileString = DataUtils.getJsonDataFromAsset(context, "items.json")
         val listType = object : TypeToken<List<EItem>>() {}.type
         return Gson().fromJson(jsonFileString, listType)
     }
 
-    fun loadListAddress(): List<EAddress>{
+    fun loadListAddress(): List<EAddress> {
         val jsonFileString = DataUtils.getJsonDataFromAsset(context, "addresses.json")
         val listType = object : TypeToken<List<EAddress>>() {}.type
         return Gson().fromJson(jsonFileString, listType)

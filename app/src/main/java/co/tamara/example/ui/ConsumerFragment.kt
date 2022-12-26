@@ -82,8 +82,11 @@ class ConsumerFragment : Fragment() {
         })
         shopBtn.setOnClickListener {
             TamaraPayment.setCustomerInfo(
-                firstNameTxt.text.toString(), lastNameTxt.text.toString(), phoneTxt.text.toString(),
-                emailTxt.text.toString(), firstOrderCheck.isChecked
+                firstName = firstNameTxt.text.toString(),
+                lastName = lastNameTxt.text.toString(),
+                phoneNumber = phoneTxt.text.toString(),
+                email = emailTxt.text.toString(),
+                isFirstOrder = firstOrderCheck.isChecked
             )
             findNavController(this).navigate(R.id.shopFragment)
         }

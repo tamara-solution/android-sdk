@@ -2,8 +2,6 @@ package co.tamara.example.model
 
 import android.os.Parcelable
 import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
@@ -23,4 +21,4 @@ data class EItem(
     @SerializedName("total_amount") var totalAmount: EAmount? = null,
     var type: String = "DIGITAL",
     @SerializedName("unit_price") var unitPrice: EAmount? = null
-): Parcelable
+) : Parcelable
