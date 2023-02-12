@@ -3,12 +3,12 @@
 Copy tamara-sdk.aar file to your app libs folder
 
 #### In app level build.gradle, add tamara-sdk.aar as libary:
-```
+```Gradle
 implementation (name:'tamara-sdk', ext:'aar')
 ```
 
 Add library required by SDK
-```
+```Gradle
 implementation 'com.google.dagger:dagger-android-support:2.21'
 implementation "com.google.dagger:dagger:2.24"
 implementation 'com.squareup.retrofit2:retrofit:2.4.0'
@@ -20,19 +20,19 @@ kapt 'com.google.dagger:dagger-android-processor:2.21'
 ```
 
 Update proguard file
-```
+```ProGuard
 -keep class co.tamara.sdk.** { *; }
 ```
 
 Add this code at the begin of build.gradle file
-```
+```Gradle
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 ```
 
 #### In project level build.gradle:
-```
+```Gradle
 allprojects {
     repositories {
         flatDir {
@@ -48,13 +48,13 @@ Sync project with gradle
 
 If you created order from your Back End, use checkout URL to process payment
 
-```
+```Kotlin
 TamaraPayment.startPayment(activity, checkoutURL, successUrl, failureUrl, cancelUrl)
 ```
 
 For Java:
 
-```
+```Java
 TamaraPayment.Companion.startPayment(activity, checkoutURL, successUrl, failureUrl, cancelUrl);
 ```
 
@@ -64,7 +64,7 @@ If you want to create order first read this:
 
 ## Get status of payment
 In your activity, use TamaraPaymentHelper to handle data returned from the SDK
-```
+```Kotlin
 override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
     super.onActivityResult(requestCode, resultCode, data)
     if (TamaraPaymentHelper.shouldHandleActivityResult(requestCode, resultCode, data)) {
@@ -104,7 +104,7 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
 
 For Java:
 
-```
+```Java
 @Override
 protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
@@ -125,7 +125,7 @@ protected void onActivityResult(int requestCode, int resultCode, @Nullable Inten
 ## Add Tamara Widget To your view
 ![alt Tamara Widget](tamara_widget.png)
 
-```
+```Xml
 <co.tamara.sdk.widget.TamaraWidgetText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
