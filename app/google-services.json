@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "754321860584",
+    "firebase_url": "https://tamara-sdk.firebaseio.com",
+    "project_id": "tamara-sdk",
+    "storage_bucket": "tamara-sdk.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:754321860584:android:9d8e2e519180d99a61e65d",
+        "android_client_info": {
+          "package_name": "co.tamara.example"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "754321860584-l6d31cfr63v53qglsj73r6kb937vlurt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApMgAvni7kHlB54b7RRlGXhGilnhY6t3U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "754321860584-l6d31cfr63v53qglsj73r6kb937vlurt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:754321860584:android:8b5aa0b3ddfb2b8f61e65d",
+        "android_client_info": {
+          "package_name": "co.tamara.example.stg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "754321860584-l6d31cfr63v53qglsj73r6kb937vlurt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApMgAvni7kHlB54b7RRlGXhGilnhY6t3U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "754321860584-l6d31cfr63v53qglsj73r6kb937vlurt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

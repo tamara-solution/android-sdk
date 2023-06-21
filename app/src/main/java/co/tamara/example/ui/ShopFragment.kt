@@ -26,12 +26,11 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.fragment_shop.*
 import kotlinx.android.synthetic.main.item_toy.*
 import kotlinx.android.synthetic.main.item_toy.view.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ShopFragment : Fragment() {
-
-    private lateinit var orderVieModel: OrderViewModel
     private var items: List<EItem>? = null
-    private lateinit var viewModel: ShopViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,20 +41,23 @@ class ShopFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(requireActivity(), ViewModelFactory()).get(ShopViewModel::class.java)
-        orderVieModel = ViewModelProvider(requireActivity()).get(OrderViewModel::class.java)
+        var viewModel: ShopViewModel = ViewModelProvider(requireActivity(), ViewModelFactory()).get(ShopViewModel::class.java)
+        var orderVieModel: OrderViewModel = ViewModelProvider(requireActivity()).get(OrderViewModel::class.java)
+
         viewModel.items.observe(viewLifecycleOwner, Observer {
             items = it
             shopList.adapter?.notifyDataSetChanged()
         })
         shopList.adapter = ShopAdapter()
         checkoutBtn.setOnClickListener {
+            TamaraPayment.clearItem()
             items?.forEach {
-                if (it.quantity > 0) {
+                if(it.quantity > 0) {
                     TamaraPayment.addItem(
                         it.name,
                         it.referenceId,
                         it.sku,
+                        it.type,
                         it.unitPrice?.amount ?: 0.0,
                         it.taxAmount?.amount ?: 0.0,
                         it.discountAmount?.amount ?: 0.0,
@@ -69,7 +71,7 @@ class ShopFragment : Fragment() {
     }
 
     fun formatPrice(textView: TextView, originalPrice: String, discountedPrice: String) {
-        if (originalPrice != discountedPrice) {
+        if(originalPrice != discountedPrice) {
             val text = "$originalPrice $discountedPrice"
             textView.setText(text, TextView.BufferType.SPANNABLE)
             val spannable = textView.text as Spannable
@@ -101,16 +103,16 @@ class ShopFragment : Fragment() {
         }
     }
 
-    inner class ShopAdapter : RecyclerView.Adapter<ShopAdapter.ViewHolder>() {
+    inner class ShopAdapter: RecyclerView.Adapter<ShopAdapter.ViewHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopAdapter.ViewHolder {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_toy, parent, false)
+            var view = LayoutInflater.from(parent.context).inflate(R.layout.item_toy, parent,false)
             view.addBtn.setOnClickListener {
-                val position = it.tag as Int
+                var position = it.tag as Int
                 items!![position].quantity = (items!![position].quantity + 1).coerceAtMost(5)
                 notifyDataSetChanged()
             }
             view.removeBtn.setOnClickListener {
-                val position = it.tag as Int
+                var position = it.tag as Int
                 items!![position].quantity = (items!![position].quantity - 1).coerceAtLeast(0)
                 notifyDataSetChanged()
             }
@@ -122,13 +124,11 @@ class ShopFragment : Fragment() {
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val item = items!![position]
+            var item = items!![position]
             holder.itemNameTxt.text = item.name
             holder.skuTxt.text = item.sku
-            val discounted = EAmount(
-                (item.unitPrice!!.amount - (item.discountAmount?.amount
-                    ?: 0.0)), item.unitPrice!!.currency
-            )
+            val discounted = EAmount((item.unitPrice!!.amount - (item.discountAmount?.amount
+                ?: 0.0)), item.unitPrice!!.currency)
             formatPrice(holder.priceTxt, item.unitPrice!!.getFormattedAmount(), discounted.getFormattedAmount())
             holder.taxTxt.text = getString(R.string.tax_with_amount, item.taxAmount?.getFormattedAmount() ?: "0")
             holder.quantityEdit.text = item.quantity.toString()

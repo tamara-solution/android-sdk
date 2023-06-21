@@ -1,0 +1,6 @@
+- MVP-140 Implement Android SDK for checkout
+- Add gitlab CI/CD for dev, master
+- Update UI for shop
+- Change api domain
+- Fix price value on Example app
+- Change token

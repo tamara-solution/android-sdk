@@ -2,7 +2,7 @@
   "order_reference_id": "123456",
   "description": "Test order using Android SDK",
   "country_code": "SA",
-  "payment_type": "PAY_BY_LATER",
+  "payment_type": "PAY_BY_INSTALMENTS",
   "locale": "en-US",
   "consumer": {
     "first_name": "Mona",

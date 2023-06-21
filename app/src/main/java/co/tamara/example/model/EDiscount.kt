@@ -7,4 +7,4 @@ import kotlinx.android.parcel.Parcelize
 data class EDiscount(
     var amount: EAmount,
     var name: String = "" // Christmas 2020
-) : Parcelable
+): Parcelable

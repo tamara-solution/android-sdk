@@ -2,26 +2,70 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.firebase.appdistribution'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    compileSdkVersion 31
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "co.tamara.example"
-        minSdkVersion 16
-        targetSdkVersion 29
+        minSdkVersion 21
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        release {
+            storeFile file("tamara-example.jks")
+            storePassword "tamara"
+            keyAlias "tamara"
+            keyPassword "tamara"
+        }
+    }
+
     buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
         debug {
             debuggable true
         }
     }
 
+
+
+    flavorDimensions "environment"
+    productFlavors {
+        production {
+            // Assigns this product flavor to the "version" flavor dimension.
+            // If you are using only one dimension, this property is optional,
+            // and the plugin automatically assigns all the module's flavors to
+            // that dimension.
+            applicationId "co.tamara.example"
+            firebaseAppDistribution {
+                appId="1:754321860584:android:9d8e2e519180d99a61e65d"
+                releaseNotesFile="app/release_notes.txt"
+                testers="tuan.tran@tamara.co"
+                groups="testers"
+            }
+            dimension "environment"
+        }
+        staging {
+            applicationId "co.tamara.example.stg"
+            firebaseAppDistribution {
+                appId="1:754321860584:android:8b5aa0b3ddfb2b8f61e65d"
+                releaseNotesFile="app/release_notes.txt"
+                testers="tuan.tran@tamara.co"
+                groups="testers"
+            }
+            dimension "environment"
+        }
+    }
     androidExtensions {
         experimental = true
     }
@@ -32,6 +76,14 @@ android {
 
 }
 
+buildscript {
+    repositories {
+        google()
+    }
+    dependencies {
+        classpath 'com.google.firebase:firebase-appdistribution-gradle:1.4.0'
+    }
+}
 
 repositories {
     mavenLocal()
@@ -55,16 +107,17 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     kapt "androidx.room:room-compiler:2.2.5"
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+//    implementation project(path: ':sdk')
 
     //For using sdk
     implementation (name:'tamara-sdk', ext:'aar')
     implementation 'com.google.dagger:dagger-android-support:2.27'
-    implementation "com.google.dagger:dagger:2.27"
-    implementation 'com.squareup.retrofit2:retrofit:2.7.2'
+    implementation "com.google.dagger:dagger:2.28.3"
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.7.2'
-    implementation "com.squareup.okhttp3:logging-interceptor:4.0.1"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.8.1"
     kapt 'com.google.dagger:dagger-compiler:2.27'
     kapt 'com.google.dagger:dagger-android-processor:2.27'
 }

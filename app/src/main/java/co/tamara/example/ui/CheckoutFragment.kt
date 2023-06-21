@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_checkout.*
 /**
  * A simple [Fragment] subclass.
  */
-class CheckoutFragment : Fragment() {
+class  CheckoutFragment : Fragment() {
     private var items: List<EItem>? = null
     private lateinit var itemViewModel: OrderViewModel
     private val shippingAmount = EAmount(20.0, "SAR")
@@ -40,10 +40,10 @@ class CheckoutFragment : Fragment() {
             updateUI()
         })
         shippingFeeTxt.text = shippingAmount.getFormattedAmount()
-        discountTxt.text = getString(R.string.neg_value, discountAmount.getFormattedAmount())
+        discountTxt.text = getString(R.string.neg_value,discountAmount.getFormattedAmount())
         addressBtn.setOnClickListener {
             TamaraPayment.setShippingAmount(shippingAmount.amount)
-            if (discountCheck.isChecked) {
+            if(discountCheck.isChecked){
                 TamaraPayment.setDiscount(discountAmount.amount, discountCheck.text.toString())
             }
             findNavController(this).navigate(R.id.shippingAddressFragment)
@@ -57,13 +57,13 @@ class CheckoutFragment : Fragment() {
         var total = 0.0
         var totalPrice = 0.0
         val ship = shippingAmount.amount
-        val discount = if (discountCheck.isChecked) discountAmount.amount else 0.0
+        val discount = if(discountCheck.isChecked) discountAmount.amount else 0.0
         var tax = 0.0
         var count = 0
         var currency = ""
-        items?.forEach {
-            totalPrice += (it.unitPrice!!.amount - (it.discountAmount?.amount ?: 0.0)) * it.quantity
-            total += (it.unitPrice!!.amount - (it.discountAmount?.amount ?: 0.0) + it.taxAmount!!.amount) * it.quantity
+        this.items?.forEach {
+            totalPrice += (it.unitPrice!!.amount - (it.discountAmount?.amount?:0.0)) * it.quantity
+            total += (it.unitPrice!!.amount - (it.discountAmount?.amount?:0.0) + it.taxAmount!!.amount) * it.quantity
             tax += it.taxAmount!!.amount * it.quantity
             count += it.quantity
             currency = it.unitPrice!!.currency
@@ -71,7 +71,7 @@ class CheckoutFragment : Fragment() {
         totalItemPriceTxt.text = EAmount(totalPrice, currency).getFormattedAmount()
         taxTxt.text = EAmount(tax, currency).getFormattedAmount()
         totalTxt.text = EAmount(total + ship - discount, currency).getFormattedAmount()
-        discountTxt.visibility = if (discountCheck.isChecked) View.VISIBLE else View.GONE
+        discountTxt.visibility = if(discountCheck.isChecked) View.VISIBLE else View.GONE
     }
 
 }

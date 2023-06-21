@@ -1,0 +1,126 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context="co.tamara.example.ui.DemoFragment">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/testFromFragmentBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_general"
+        android:text="@string/test_from_fragment"
+        android:visibility="gone"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/init"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_general"
+        android:text="Init"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/createOrderBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_general"
+        android:text="@string/test_create_order"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/orderDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_general"
+        android:text="Get order detail"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/authoriseOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_general"
+        android:text="Authorise order"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/cancelOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_general"
+        android:text="Cancel order"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/updateOrderReference"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_general"
+        android:text="update order Reference ID"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/capture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_general"
+        android:text="capture"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/refunds"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_general"
+        android:text="Refund"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/cartPage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_general"
+        android:text="Cart page"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <WebView
+            android:id="@+id/cartW"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:clickable="false"/>
+        <FrameLayout
+            android:id="@+id/flCart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </FrameLayout>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/product"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_general"
+        android:text="Product"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <WebView
+            android:id="@+id/productW"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginBottom="20dp"/>
+        <FrameLayout
+            android:id="@+id/flProduct"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </FrameLayout>
+
+    <co.tamara.sdk.widget.PayWithTamaraWidget
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_general"
+        android:visibility="gone"/>
+
+</LinearLayout>
+</ScrollView>

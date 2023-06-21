@@ -10,12 +10,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         tools:context="co.tamara.example.MainActivity">
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/fragmentBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_general"
-            android:text="@string/quick_test_from_fragment"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             style="@style/TextAppearance.AppCompat.Headline"
@@ -52,7 +46,7 @@
                         android:layout_weight="1"
                         android:text="@string/first_name" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/firstNameTxt"
                         style="@style/TextAppearance.AppCompat.Body2"
                         android:layout_width="wrap_content"
@@ -71,7 +65,7 @@
                         android:layout_weight="1"
                         android:text="@string/last_name" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/lastNameTxt"
                         style="@style/TextAppearance.AppCompat.Body2"
                         android:layout_width="wrap_content"
@@ -90,7 +84,7 @@
                         android:layout_weight="1"
                         android:text="@string/email" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/emailTxt"
                         style="@style/TextAppearance.AppCompat.Body2"
                         android:layout_width="wrap_content"
@@ -109,7 +103,7 @@
                         android:layout_weight="1"
                         android:text="@string/phone" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/phoneTxt"
                         style="@style/TextAppearance.AppCompat.Body2"
                         android:layout_width="wrap_content"
@@ -131,15 +125,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_general"
             android:text="@string/select_items" />
-
-        <co.tamara.sdk.widget.TamaraWidgetText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/tamara_margin_general"
-            app:currency="SAR"
-            app:pay_value="100"
-            app:unequal="true"
-            app:widget_mode="border" />
 
     </LinearLayout>
 </ScrollView>

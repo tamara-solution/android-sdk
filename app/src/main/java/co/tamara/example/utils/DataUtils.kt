@@ -4,7 +4,7 @@ import android.content.Context
 import java.io.IOException
 
 class DataUtils {
-    companion object {
+    companion object{
         fun getJsonDataFromAsset(context: Context, fileName: String): String? {
             val jsonString: String
             try {

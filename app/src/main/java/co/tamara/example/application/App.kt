@@ -3,7 +3,8 @@ package co.tamara.example.application
 import android.app.Application
 import co.tamara.example.data.DataSource
 
-class App : Application() {
+
+class App: Application() {
     lateinit var dataSource: DataSource
 
     override fun onCreate() {
@@ -11,8 +12,7 @@ class App : Application() {
         instance = this
         dataSource = DataSource(applicationContext)
     }
-
-    companion object {
+    companion object{
         lateinit var instance: App
             private set
     }

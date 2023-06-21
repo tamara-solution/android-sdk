@@ -6,13 +6,12 @@ import androidx.lifecycle.liveData
 import co.tamara.example.data.DataSource
 import co.tamara.example.model.EItem
 
-class ShopViewModel(private val dataSource: DataSource) : ViewModel() {
+class ShopViewModel(private val dataSource: DataSource) : ViewModel(){
     val items: LiveData<List<EItem>> = liveData {
-        val items = loadDataFromAsset()
+        var items = loadDataFromAsset()
         emit(items)
     }
-
-    private fun loadDataFromAsset(): List<EItem> {
+    private suspend fun loadDataFromAsset(): List<EItem> {
         return dataSource.loadListItem()
     }
 }
