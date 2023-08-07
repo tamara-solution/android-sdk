@@ -3,23 +3,23 @@ To intergrate Tamara Pay SDK to your app, you need AUTH_TOKEN, API_URL and your 
 ```
 const val API_URL = "https://api-sandbox.tamara.co/"
 
-const val AUTH_TOKEN ="your_api_token"
+const val AUTH_TOKEN ="eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhY2NvdW50SWQiOiI0NWQwMzAzOC1kM2I2LTQ1ODctYWY2Ny1hNDNlY2FlYjFiZDMiLCJ0eXBlIjoibWVyY2hhbnQiLCJzYWx0IjoiOTIwNDFjZDVlOTJlNDQ1MDg1ZTQ2NzgyZWFhYTY3NjkiLCJpYXQiOjE1ODc3NjM2MzksImlzcyI6IlRhbWFyYSJ9.jPwKTNMwGFZ-gueED91piwXk8EA2OcqlYDlDZwg67Oo7ec7E-7Qao89BTJc-gfdyQ8542JqdAuGlg3PlC7-he5fhCUyGAbnEVy9r2pO8ROO9sINXCkdi-CotLTnO_ENWd6AMCnNlNx7hZ1wsVCVSQS6RNZjOm8iEdHxyCRU13pLWxzsSR2WGsqplVprgeMxSdMKjLatdGEk7ipp4mVUTPba4rSYvselIOfpVvX8XDN1y_aYPIIVlCtpLeJ7MRrkyH0LBZ-4b2Ac1iDAjg51K_qvYng4xNiNEyflmy9kmtkNIrPMP1IlAR0ZEx2epAlhKU7TgIiVC1bs0hjMe6M2QMQ"
 
 const val NOTIFICATION_WEB_HOOK_URL = "https://your.site/pushnotification"
 
-const val PUBLISH_KEY = "your_public_key"
+const val PUBLISH_KEY = "e3eo6279-90c2-4239-b4e2-2c91bpodisjd"
 
-const val NOTIFICATION_TOKEN = "your_notification_token_key"
+const val NOTIFICATION_TOKEN = "dede4a2-5f57-475e-a384-9o d9b8a803487"
 
-val isSanbox: sandbox/production account
-if sandbox account: isSanbox = false
-if production account: isSanbox = true
+val isSandbox: sandbox/production account
+if sandbox account: isSandbox = true
+if production account: isSandbox = false
 ```
 
 ## Initializes SDK
 Initialize TamaraPayment before using it:
 ```
-TamaraPayment.initialize(AUTH_TOKEN, API_URL, NOTIFICATION_WEB_HOOK_URL, PUBLISH_KEY, NOTIFICATION_TOKEN, isSanbox)
+TamaraPayment.initialize(AUTH_TOKEN, API_URL, NOTIFICATION_WEB_HOOK_URL, PUBLISH_KEY, NOTIFICATION_TOKEN, isSandbox)
 ```
 
 ## Create and pay order
@@ -244,13 +244,13 @@ CartPage(script=<script>
         window.tamaraWidgetConfig = {
             lang: "en",
             country: "SA",
-            publicKey: "you_public_key"
+            publicKey: "d36c6279-90c2-4239-b4e2-2c91bfda0fe4"
         }
       </script>
       <script defer type="text/javascript" src="https://cdn-sandbox.tamara.co/widget-v2/tamara-widget.js"></script>
 
       
-      <tamara-widget type="tamara-summary" amount="250.0" inline-type="3"></tamara-widget>, url=https://cdn-sandbox.tamara.co/widget-v2/tamara-widget.html?lang=en&public_key=your_public_key&country=SA&amount=250.0&inline_type=3)
+      <tamara-widget type="tamara-summary" amount="250.0" inline-type="3"></tamara-widget>, url=https://cdn-sandbox.tamara.co/widget-v2/tamara-widget.html?lang=en&public_key=d36c6279-90c2-4239-b4e2-2c91bfda0fe4&country=SA&amount=250.0&inline_type=3)
 ```
 ## Render widget product
 Render widget product reference by call this method with language, country, publicKey, amount.
@@ -266,13 +266,13 @@ Product(script=<script>
         window.tamaraWidgetConfig = {
             lang: "en",
             country: "SA",
-            publicKey: "your_public_key"
+            publicKey: "d36c6279-90c2-4239-b4e2-2c91bfda0fe4"
         }
       </script>
       <script defer type="text/javascript" src="https://cdn-sandbox.tamara.co/widget-v2/tamara-widget.js"></script>
 
       
-      <tamara-widget type="tamara-summary" amount="250.0" inline-type="3"></tamara-widget>, url=https://cdn-sandbox.tamara.co/widget-v2/tamara-widget.html?lang=en&public_key=your_public_key&country=SA&amount=250.0&inline_type=2)
+      <tamara-widget type="tamara-summary" amount="250.0" inline-type="3"></tamara-widget>, url=https://cdn-sandbox.tamara.co/widget-v2/tamara-widget.html?lang=en&public_key=d36c6279-90c2-4239-b4e2-2c91bfda0fe4&country=SA&amount=250.0&inline_type=2)
 ```
 ## Get result 
 

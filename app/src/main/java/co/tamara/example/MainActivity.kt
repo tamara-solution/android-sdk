@@ -2,6 +2,7 @@ package co.tamara.example
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation.findNavController
@@ -9,6 +10,7 @@ import co.tamara.example.appvalue.AppConst
 import co.tamara.sdk.PaymentResult
 import co.tamara.sdk.TamaraPayment
 import co.tamara.sdk.TamaraPaymentHelper
+import kotlin.math.log
 
 internal class MainActivity : AppCompatActivity() {
 
@@ -26,6 +28,7 @@ internal class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if(TamaraPaymentHelper.shouldHandleActivityResult(requestCode, resultCode, data)){
             var result = TamaraPaymentHelper.getData(data!!)
+
             when(result?.status){
                 PaymentResult.STATUS_CANCEL ->{
                     Toast.makeText(this, R.string.payment_cancel, Toast.LENGTH_LONG).show()
@@ -35,7 +38,7 @@ internal class MainActivity : AppCompatActivity() {
                 }
                 PaymentResult.STATUS_SUCCESS -> {
                     Toast.makeText(this, R.string.payment_success, Toast.LENGTH_LONG).show()
-                    findNavController(this,R.id.navHostFragment).navigate(R.id.consumerFragment)
+//                    findNavController(this,R.id.navHostFragment).navigate(R.id.consumerFragment)
                 }
             }
         }
