@@ -9,11 +9,11 @@ Aar file can be found in this folder: sdk\build\outputs\aar
 Rename file to tamara-sdk.aar
 
 ### Use aar file as library
-Copy aar file to your app libs folder
+Copy aar file to your app libs folder: app-> libs->aars->tamara-sdk.aar
 
 In app level build.gradle, add tamara-sdk.aar as libary:
 ```
-implementation (name:'tamara-sdk', ext:'aar')
+implementation fileTree(dir: 'libs/aars', include: ['*.aar'])
 ```
 
 In project level build.gradle:

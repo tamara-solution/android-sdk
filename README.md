@@ -4,11 +4,11 @@ This project including 2 modules:
 - Example app: Simple online shoping app which uses Tamara SDK for payment
 
 ## Setup SDK
-Copy tamara-sdk.aar file to your app libs folder
+Copy aar file to your app libs folder: app-> libs->aars->tamara-sdk.aar
 
 #### In app level build.gradle, add tamara-sdk.aar as libary:
 ```
-implementation (name:'tamara-sdk', ext:'aar')
+implementation fileTree(dir: 'libs/aars', include: ['*.aar'])
 ```
 
 Add library required by SDK
