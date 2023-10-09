@@ -12,14 +12,18 @@ import android.widget.Toast
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import co.tamara.example.R
+import co.tamara.example.databinding.FragmentDemoBinding
 import co.tamara.example.model.*
 import co.tamara.example.model.CancelOrder
 import co.tamara.example.model.Capture
 import co.tamara.example.model.ShippingInfo
 import co.tamara.example.utils.DialogFactory
-import co.tamara.sdk.*
+import co.tamara.sdk.InformationResult
+import co.tamara.sdk.PaymentResult
+import co.tamara.sdk.TamaraInformationHelper
+import co.tamara.sdk.TamaraPayment
+import co.tamara.sdk.TamaraPaymentHelper
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.fragment_demo.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,7 +36,8 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class DemoFragment : Fragment() {
-
+    private var _binding: FragmentDemoBinding? = null
+    private val binding get() = _binding!!
     var isCancelOrder: Boolean = false
     var isLoad: Boolean = false
     var urlCart: String = ""
@@ -49,19 +54,19 @@ class DemoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_demo, container, false)
+        _binding = FragmentDemoBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        testFromFragmentBtn.setOnClickListener{
+        binding.testFromFragmentBtn.setOnClickListener{
             TamaraPayment.startPayment(this, "https://checkout-staging.tamara.co/checkout/310fdb59-f447-44df-825b-19f467c6774b?locale=en-US",
                 "tamara://success", "tamara://failure", "tamara://cancel")
         }
 
-        init.setOnClickListener {
+        binding.init.setOnClickListener {
             DialogFactory.dialogInit(
                 requireActivity(),
                 object : DialogFactory.DialogListener.Init {
@@ -77,11 +82,11 @@ class DemoFragment : Fragment() {
                 })
         }
 
-        createOrderBtn.setOnClickListener {
+        binding.createOrderBtn.setOnClickListener {
             findNavController().navigate(R.id.action_demoFragment_to_consumerFragment)
         }
 
-        orderDetail.setOnClickListener {
+        binding.orderDetail.setOnClickListener {
             DialogFactory.dialogCancelOrder(
                 requireActivity(),
                 object : DialogFactory.DialogListener.CancelOrder {
@@ -92,7 +97,7 @@ class DemoFragment : Fragment() {
                 })
         }
 
-        updateOrderReference.setOnClickListener {
+        binding.updateOrderReference.setOnClickListener {
             DialogFactory.dialogUpdateOrder(
                 requireActivity(),
                 object : DialogFactory.DialogListener.OrderReference {
@@ -102,7 +107,7 @@ class DemoFragment : Fragment() {
                 })
         }
 
-        authoriseOrder.setOnClickListener {
+        binding.authoriseOrder.setOnClickListener {
             DialogFactory.dialogCancelOrder(
                 requireActivity(),
                 object : DialogFactory.DialogListener.CancelOrder {
@@ -112,7 +117,7 @@ class DemoFragment : Fragment() {
                 })
         }
 
-        cancelOrder.setOnClickListener {
+        binding.cancelOrder.setOnClickListener {
             DialogFactory.dialogCancelOrder(
                 requireActivity(),
                 object : DialogFactory.DialogListener.CancelOrder {
@@ -123,7 +128,7 @@ class DemoFragment : Fragment() {
                 })
         }
 
-        capture.setOnClickListener {
+        binding.capture.setOnClickListener {
             DialogFactory.dialogCapture(
                 requireActivity(),
                 object : DialogFactory.DialogListener.Capture {
@@ -137,7 +142,7 @@ class DemoFragment : Fragment() {
                 })
         }
 
-        refunds.setOnClickListener {
+        binding.refunds.setOnClickListener {
             DialogFactory.dialogRefund(
                 requireActivity(),
                 object : DialogFactory.DialogListener.Refunds {
@@ -148,7 +153,7 @@ class DemoFragment : Fragment() {
                 })
         }
 
-        cartPage.setOnClickListener {
+        binding.cartPage.setOnClickListener {
             DialogFactory.dialogWidget(
                 requireActivity(),
                 object : DialogFactory.DialogListener.Widget {
@@ -163,7 +168,7 @@ class DemoFragment : Fragment() {
                 })
         }
 
-        product.setOnClickListener {
+        binding.product.setOnClickListener {
             DialogFactory.dialogWidget(
                 requireActivity(),
                 object : DialogFactory.DialogListener.Widget {
@@ -178,7 +183,7 @@ class DemoFragment : Fragment() {
                 })
         }
 
-        flCart.setOnClickListener {
+        binding.flCart.setOnClickListener {
             if (urlCart.isNotEmpty()) {
                 isLoad = true
                 val bundle = Bundle()
@@ -187,7 +192,7 @@ class DemoFragment : Fragment() {
             }
         }
 
-        flProduct.setOnClickListener {
+        binding.flProduct.setOnClickListener {
             if (urlProduct.isNotEmpty()) {
                 isLoad = true
                 val bundle = Bundle()
@@ -312,8 +317,8 @@ class DemoFragment : Fragment() {
                         }
                         InformationResult.STATUS_SUCCESS -> {
                             val cartPage = TamaraInformationHelper.getCartPage(data)
-                            cartW.settings.javaScriptEnabled = true
-                            cartW.loadDataWithBaseURL("file:///android_asset/",
+                            binding.cartW.settings.javaScriptEnabled = true
+                            binding.cartW.loadDataWithBaseURL("file:///android_asset/",
                                 cartPage?.script.toString(),"text/html","utf-8",null)
 //                            cartW.loadData(cartPage?.script, "text/html", "utf-8");
                             urlScriptCart = cartPage?.script.toString()
@@ -337,9 +342,9 @@ class DemoFragment : Fragment() {
                         }
                         InformationResult.STATUS_SUCCESS -> {
                             val product = TamaraInformationHelper.getProduct(data)
-                            productW.settings.defaultTextEncodingName = "utf-8"
-                            productW.settings.javaScriptEnabled = true
-                            productW.loadDataWithBaseURL("file:///android_asset/",
+                            binding.productW.settings.defaultTextEncodingName = "utf-8"
+                            binding.productW.settings.javaScriptEnabled = true
+                            binding.productW.loadDataWithBaseURL("file:///android_asset/",
                                 product?.script.toString(),"text/html","utf-8",null)
 //                            productW.loadData(product?.script, "text/html", "utf-8");
                             urlScriptProduct = product?.script.toString()
@@ -397,17 +402,17 @@ class DemoFragment : Fragment() {
         super.onResume()
         if (isLoad) {
             if (urlScriptCart.isNotEmpty()) {
-                cartW.clearCache(true)
-                cartW.clearHistory()
-                cartW.settings.javaScriptEnabled = true
-                cartW.loadDataWithBaseURL("file:///android_asset/",urlScriptCart,"text/html","utf-8",null)
+                binding.cartW.clearCache(true)
+                binding.cartW.clearHistory()
+                binding.cartW.settings.javaScriptEnabled = true
+                binding.cartW.loadDataWithBaseURL("file:///android_asset/",urlScriptCart,"text/html","utf-8",null)
             }
             if (urlScriptProduct.isNotEmpty()) {
-                productW.clearCache(true)
-                productW.clearHistory()
-                productW.settings.defaultTextEncodingName = "utf-8"
-                productW.settings.javaScriptEnabled = true
-                productW.loadDataWithBaseURL("file:///android_asset/",urlScriptProduct,"text/html","utf-8",null)
+                binding.productW.clearCache(true)
+                binding.productW.clearHistory()
+                binding.productW.settings.defaultTextEncodingName = "utf-8"
+                binding.productW.settings.javaScriptEnabled = true
+                binding.productW.loadDataWithBaseURL("file:///android_asset/",urlScriptProduct,"text/html","utf-8",null)
             }
             isLoad = false
         }

@@ -17,17 +17,23 @@ implementation 'com.google.dagger:dagger-android-support:2.21'
 implementation "com.google.dagger:dagger:2.24"
 implementation 'com.squareup.retrofit2:retrofit:2.4.0'
 implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+implementation "androidx.navigation:navigation-fragment-ktx:2.7.3"
+implementation 'androidx.navigation:navigation-ui-ktx:2.7.3'
 implementation "com.squareup.okhttp3:logging-interceptor:4.0.1"
-implementation "androidx.navigation:navigation-fragment-ktx:2.2.2"
 kapt 'com.google.dagger:dagger-compiler:2.21'
 kapt 'com.google.dagger:dagger-android-processor:2.21'
 ```
 
 Add this code at the begin of build.gradle file
 ```
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-parcelize'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'maven-publish
 ```
 
 #### In project level build.gradle:

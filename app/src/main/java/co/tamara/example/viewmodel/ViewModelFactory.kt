@@ -10,7 +10,7 @@ import co.tamara.example.ui.ShopViewModel
 
 @Suppress("UNCHECKED_CAST")
 class ViewModelFactory: ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
             modelClass.isAssignableFrom(ShopViewModel::class.java) -> {
                 ShopViewModel(App.instance.dataSource) as T
@@ -24,4 +24,5 @@ class ViewModelFactory: ViewModelProvider.Factory {
             else -> throw IllegalArgumentException("Unknown ViewModel class")
         }
     }
+
 }
