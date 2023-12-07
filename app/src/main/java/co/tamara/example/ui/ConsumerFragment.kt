@@ -37,6 +37,7 @@ class ConsumerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         TamaraPayment.createOrder(createTransactionID(), "Description")
+        TamaraPayment.setInstalments(1)
     }
 
     @Throws(Exception::class)

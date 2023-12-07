@@ -66,6 +66,11 @@ Set discount (optional):
 TamaraPayment.setDiscount(discount, name)
 ```
 
+Set instalments:
+```
+TamaraPayment.setInstalments(instalments)
+```
+
 Processes to Tamara payment page using:
 ```
 TamaraPayment.startPayment(activity)
