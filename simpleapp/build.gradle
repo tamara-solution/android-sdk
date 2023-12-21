@@ -1,0 +1,83 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-parcelize'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 34
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "co.tamarapy.example.simple"
+        minSdkVersion 21
+        targetSdkVersion 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug{
+            buildConfigField "String", "apiUrl", "\"https://api-sandbox.tamara.co/\""
+            buildConfigField "String", "TRIGRAM", "\"staging\""
+//            signingConfig signingConfigs.debug
+        }
+        release {
+            buildConfigField "String", "apiUrl", "\"https://api.tamara.co/\""
+            buildConfigField "String", "TRIGRAM", "\"production\""
+//            signingConfig signingConfigs.release
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "environment"
+    productFlavors {
+        production {
+            // Assigns this product flavor to the "version" flavor dimension.
+            // If you are using only one dimension, this property is optional,
+            // and the plugin automatically assigns all the module's flavors to
+            // that dimension.
+            dimension "environment"
+
+        }
+        staging {
+            dimension "environment"
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.core:core-ktx:1.3.2'
+
+
+    implementation project(path: ':sdk')
+    //Tamara SDK
+//    implementation (name:'tamara-sdk', ext:'aar')
+//    implementation "co.tamara.android:android-sdk:1.1.0"
+    implementation 'com.google.dagger:dagger-android-support:2.27'
+    implementation "com.google.dagger:dagger:2.27"
+    implementation 'com.squareup.retrofit2:retrofit:2.7.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.7.2'
+    implementation "com.squareup.okhttp3:logging-interceptor:4.0.1"
+    kapt 'com.google.dagger:dagger-compiler:2.27'
+    kapt 'com.google.dagger:dagger-android-processor:2.27'
+
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.7.3'
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+}

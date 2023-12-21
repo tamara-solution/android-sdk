@@ -38,6 +38,7 @@ class ConsumerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         TamaraPayment.createOrder(createTransactionID(), "Description")
         TamaraPayment.setInstalments(1)
+        TamaraPayment.setLocale("en-US")
     }
 
     @Throws(Exception::class)

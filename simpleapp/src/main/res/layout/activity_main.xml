@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/testBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dip"
+        android:text="@string/test_sdk" />
+
+    <co.tamara.sdk.widget.TamaraWidgetText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/tamara_margin_general"
+        app:unequal="true"
+        app:pay_value="100"
+        app:currency="SAR"
+        app:widget_mode="inline"/>
+
+    <co.tamara.sdk.widget.TamaraWidgetText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/tamara_margin_general"
+        app:unequal="false"
+        app:pay_value="100"
+        app:currency="SAR"
+        app:widget_mode="inline"/>
+
+    <co.tamara.sdk.widget.TamaraWidgetText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/tamara_margin_general"
+        app:unequal="true"
+        app:pay_value="100"
+        app:currency="SAR"
+        app:widget_mode="border"/>
+
+    <co.tamara.sdk.widget.TamaraWidgetText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/tamara_margin_general"
+        app:unequal="false"
+        app:pay_value="100"
+        app:currency="SAR"
+        app:widget_mode="border"/>
+
+</LinearLayout>

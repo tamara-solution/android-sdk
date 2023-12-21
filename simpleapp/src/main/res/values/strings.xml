@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Simple Example</string>
+    <string name="test_sdk">Test SDK</string>
+</resources>

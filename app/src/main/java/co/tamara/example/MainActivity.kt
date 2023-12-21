@@ -37,6 +37,8 @@ internal class MainActivity : AppCompatActivity() {
                     Toast.makeText(this, result.getMessage() ?: getString(R.string.payment_error), Toast.LENGTH_LONG).show()
                 }
                 PaymentResult.STATUS_SUCCESS -> {
+                    val checkoutSession = TamaraPaymentHelper.checkOutSession(data)
+                    Log.d("TAG", "checkoutSession>>>>>: ${checkoutSession?.order_id}")
                     Toast.makeText(this, R.string.payment_success, Toast.LENGTH_LONG).show()
 //                    findNavController(this,R.id.navHostFragment).navigate(R.id.consumerFragment)
                 }
