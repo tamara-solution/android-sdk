@@ -71,6 +71,37 @@ Set instalments:
 TamaraPayment.setInstalments(instalments)
 ```
 
+Set locale:
+```
+TamaraPayment.setLocale(locale)
+```
+
+Set order number:
+```
+TamaraPayment.setOrderNumber(orderNumber)
+```
+
+Set expires in minutes:
+```
+TamaraPayment.setExpiresInMinutes(expiresInMinutes)
+```
+
+Set risk assessment:
+```
+TamaraPayment.setRiskAssessments(jsonData)
+```
+
+Set additional data:
+```
+TamaraPayment.setAdditionalData(jsonData)
+```
+
+Add Custom Fields AdditionalData: 
+Example val jsonData = "{\"custom_field1\": 42, \"custom_field2\": \"value2\" }"
+```
+TamaraPayment.addCustomFieldsAdditionalData(jsonData)
+```
+
 Processes to Tamara payment page using:
 ```
 TamaraPayment.startPayment(activity)

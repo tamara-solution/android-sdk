@@ -39,6 +39,9 @@ class ConsumerFragment : Fragment() {
         TamaraPayment.createOrder(createTransactionID(), "Description")
         TamaraPayment.setInstalments(1)
         TamaraPayment.setLocale("en-US")
+        val jsonString = "{ \"delivery_method\": \"Delivery\", \"pickup_store\": \"Store123\"}"
+        TamaraPayment.setAdditionalData(jsonString)
+        TamaraPayment.addCustomFieldsAdditionalData("{\"custom_field1\": 42, \"custom_field2\": \"value2\" }")
     }
 
     @Throws(Exception::class)
