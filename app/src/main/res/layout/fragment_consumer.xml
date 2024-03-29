@@ -119,6 +119,24 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_general"
+            android:layout_marginTop="@dimen/margin_general"
+            android:layout_marginEnd="@dimen/margin_general"
+            android:text="@string/riskAssessment"
+            android:textSize="20sp" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edtInputJson"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_general"
+            android:hint="Input json"
+            android:text=""/>
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/shopBtn"
             android:layout_width="match_parent"

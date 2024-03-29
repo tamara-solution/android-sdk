@@ -153,6 +153,23 @@ class DemoFragment : Fragment() {
                 })
         }
 
+        binding.paymentOptions.setOnClickListener {
+            DialogFactory.dialogCheckPayment(requireActivity(),
+                object : DialogFactory.DialogListener.CheckPayment {
+                    override fun checkPayment(
+                        country: String,
+                        amount: Double,
+                        currency: String,
+                        phoneNumber: String?,
+                        isVip: Boolean?
+                    ) {
+                        TamaraPayment.paymentOptions(this@DemoFragment, Gson().toJson(
+                            PaymentOptions(country = country, orderValue = EAmount(amount, currency), phoneNumber = phoneNumber,
+                                isVip = isVip)))
+                    }
+            })
+        }
+
         binding.cartPage.setOnClickListener {
             DialogFactory.dialogWidget(
                 requireActivity(),
@@ -389,6 +406,25 @@ class DemoFragment : Fragment() {
                             DialogFactory.dialogOrder(
                                 requireActivity(),
                                 " "+authorise
+                            )
+//                            Toast.makeText(requireActivity(), "Order Reference "+refunds, Toast.LENGTH_LONG).show()
+                        }
+                    }
+                }
+            }
+
+            TamaraPayment.REQUEST_TAMARA_PAYMENT_OPTIONS-> {
+                if(TamaraInformationHelper.shouldHandleActivityResult(requestCode, resultCode, data)){
+                    var result = TamaraInformationHelper.getData(data!!)
+                    when(result?.status){
+                        InformationResult.STATUS_FAILURE -> {
+                            Toast.makeText(requireActivity(), result.getMessage() ?: "Check payment availability error", Toast.LENGTH_LONG).show()
+                        }
+                        InformationResult.STATUS_SUCCESS -> {
+                            val paymentOptions = TamaraInformationHelper.getPaymentOptions(data)
+                            DialogFactory.dialogOrder(
+                                requireActivity(),
+                                " "+paymentOptions
                             )
 //                            Toast.makeText(requireActivity(), "Order Reference "+refunds, Toast.LENGTH_LONG).show()
                         }

@@ -39,9 +39,10 @@ class ConsumerFragment : Fragment() {
         TamaraPayment.createOrder(createTransactionID(), "Description")
         TamaraPayment.setInstalments(1)
         TamaraPayment.setLocale("en-US")
-        val jsonString = "{ \"delivery_method\": \"Delivery\", \"pickup_store\": \"Store123\"}"
-        TamaraPayment.setAdditionalData(jsonString)
+
+        TamaraPayment.setAdditionalData("{ \"delivery_method\": \"Delivery\", \"pickup_store\": \"Store123\"}")
         TamaraPayment.addCustomFieldsAdditionalData("{\"custom_field1\": 42, \"custom_field2\": \"value2\" }")
+
     }
 
     @Throws(Exception::class)
@@ -61,6 +62,7 @@ class ConsumerFragment : Fragment() {
         })
         binding.shopBtn.setOnClickListener {
             TamaraPayment.setPaymentType("PAY_BY_INSTALMENTS")
+            TamaraPayment.setRiskAssessment(binding.edtInputJson.text.toString(), requireActivity())
             TamaraPayment.setCustomerInfo(binding.firstNameTxt.text.toString(), binding.lastNameTxt.text.toString(),binding.phoneTxt.text.toString(),
                 binding.emailTxt.text.toString(),binding.firstOrderCheck.isChecked)
             findNavController(this).navigate(R.id.shopFragment)

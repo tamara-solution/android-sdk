@@ -33,7 +33,10 @@ object DialogFactory {
             fun widget(language: String, country: String, publicKey: String,
                         amount: Double)
         }
-
+        interface CheckPayment {
+            fun checkPayment(country: String, amount: Double, currency: String,
+                             phoneNumber: String?, isVip: Boolean?)
+        }
         interface Init {
             fun init(authToken: String, apiUrl: String, noticationWeb: String,
                        publicKey: String, notificationToken: String)
@@ -132,7 +135,6 @@ object DialogFactory {
         }
         dialog.show()
     }
-
     fun dialogCapture(
         activity: Activity,
         listener: DialogListener.Capture) {
@@ -156,7 +158,35 @@ object DialogFactory {
         }
         dialog.show()
     }
+    fun dialogCheckPayment(
+        activity: Activity,
+        listener: DialogListener.CheckPayment) {
+        val dialog = TranslucentDialog(activity)
+        dialog.window!!.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+//        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setContentView(R.layout.dialog_check_payment_options)
+        dialog.setCancelable(true)
+        dialog.setCanceledOnTouchOutside(true)
+        var txtCountry = dialog.findViewById(R.id.txtCountry) as EditText
+        val txtAmount = dialog.findViewById(R.id.amount) as EditText
+        val currency = dialog.findViewById(R.id.currency) as EditText
+        val phoneNumber = dialog.findViewById(R.id.phoneNumber) as EditText
+        val isVip = dialog.findViewById(R.id.isVip) as EditText
+        val btSetup = dialog.findViewById(R.id.btSetup) as TextView
+        btSetup.setOnClickListener {
+            if (txtCountry.text.toString().isNotEmpty() && txtAmount.text.toString().isNotEmpty() &&
+                currency.text.toString().isNotEmpty()) {
+                listener.checkPayment(txtCountry.text.toString(), txtAmount.text.toString().toDouble(),
+                    currency.text.toString(), phoneNumber.text.toString(),
+                    isVip.text.toString().toBoolean())
+            } else {
+                Toast.makeText(activity, "Please input required", Toast.LENGTH_SHORT).show()
 
+            }
+            dialog.dismiss()
+        }
+        dialog.show()
+    }
     fun dialogWidget(
         activity: Activity,
         listener: DialogListener.Widget) {

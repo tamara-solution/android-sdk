@@ -74,6 +74,13 @@
         android:text="Refund"/>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/paymentOptions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_general"
+        android:text="Check Payment Options"/>
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cartPage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
