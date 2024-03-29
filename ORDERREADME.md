@@ -88,7 +88,9 @@ TamaraPayment.setExpiresInMinutes(expiresInMinutes)
 
 Set risk assessment:
 ```
-TamaraPayment.setRiskAssessments(jsonData)
+TamaraPayment.setRiskAssessment(jsonData, activity)
+```
+example: TamaraPayment.setRiskAssessment(edtInputJson.text.toString(), requireActivity())
 ```
 
 Set additional data:
@@ -487,6 +489,25 @@ Product(script=<script>
                             DialogFactory.dialogOrder(
                                 requireActivity(),
                                 " "+authorise
+                            )
+//                            Toast.makeText(requireActivity(), "Order Reference "+refunds, Toast.LENGTH_LONG).show()
+                        }
+                    }
+                }
+            }
+
+		TamaraPayment.REQUEST_TAMARA_PAYMENT_OPTIONS-> {
+                if(TamaraInformationHelper.shouldHandleActivityResult(requestCode, resultCode, data)){
+                    var result = TamaraInformationHelper.getData(data!!)
+                    when(result?.status){
+                        InformationResult.STATUS_FAILURE -> {
+                            Toast.makeText(requireActivity(), result.getMessage() ?: "Check payment availability error", Toast.LENGTH_LONG).show()
+                        }
+                        InformationResult.STATUS_SUCCESS -> {
+                            val paymentOptions = TamaraInformationHelper.getPaymentOptions(data)
+                            DialogFactory.dialogOrder(
+                                requireActivity(),
+                                " "+paymentOptions
                             )
 //                            Toast.makeText(requireActivity(), "Order Reference "+refunds, Toast.LENGTH_LONG).show()
                         }
