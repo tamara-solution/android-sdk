@@ -1,4 +1,4 @@
 rootProject.name='Tamara Checkout SDK'
-include ':app'
+include ':example'
 include ':sdk'
 include ':simpleapp'
