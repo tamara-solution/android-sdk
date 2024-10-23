@@ -23,10 +23,9 @@ TamaraPayment.initialize(AUTH_TOKEN, API_URL, NOTIFICATION_WEB_HOOK_URL, PUBLISH
 ```
 
 ## Create and pay order
-Before adding order's information, create Order by call this method with referenceOrderId and description.
-RefId is your unique id of your order.
+Before adding order's information, create Order by call this method with description.
 ```
-TamaraPayment.createOrder(referenceOrderId, description)
+TamaraPayment.createOrder(description)
 ```
 
 ### These informations are mandatory:
@@ -79,6 +78,11 @@ TamaraPayment.setLocale(locale)
 Set order number:
 ```
 TamaraPayment.setOrderNumber(orderNumber)
+```
+
+Set orderReferenceId:
+```
+TamaraPayment.setOrderReferenceId(orderReferenceId)
 ```
 
 Set expires in minutes:

@@ -13,18 +13,18 @@ implementation fileTree(dir: 'libs/aars', include: ['*.aar'])
 
 Add library required by SDK
 ```
-implementation 'com.google.dagger:dagger-android-support:2.21'
-implementation "com.google.dagger:dagger:2.24"
-implementation 'com.squareup.retrofit2:retrofit:2.4.0'
-implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+implementation 'com.google.dagger:dagger-android-support:2.52'
+implementation "com.google.dagger:dagger:2.52"
+implementation 'com.squareup.retrofit2:retrofit:2.11.0'
+implementation 'com.squareup.retrofit2:converter-gson:2.11.0'
 implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.6'
 implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-implementation "androidx.navigation:navigation-fragment-ktx:2.7.3"
-implementation 'androidx.navigation:navigation-ui-ktx:2.7.3'
-implementation "com.squareup.okhttp3:logging-interceptor:4.0.1"
-kapt 'com.google.dagger:dagger-compiler:2.21'
-kapt 'com.google.dagger:dagger-android-processor:2.21'
+implementation "androidx.navigation:navigation-fragment-ktx:2.8.3"
+implementation 'androidx.navigation:navigation-ui-ktx:2.8.3'
+implementation "com.squareup.okhttp3:logging-interceptor:4.12.0"
+kapt 'com.google.dagger:dagger-compiler:2.52'
+kapt 'com.google.dagger:dagger-android-processor:2.52'
 ```
 
 Add this code at the begin of build.gradle file

@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
                 NOTIFICATION_TOKEN,
                 true
             )
-            TamaraPayment.createOrder("1", "1")
+            TamaraPayment.createOrder("1")
             TamaraPayment.startPayment(this)
 
         }
